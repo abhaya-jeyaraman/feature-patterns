@@ -1,0 +1,99 @@
+.heading {
+    font-size: 32px;
+    text-align: center;
+    background-color: green;
+    color: white;
+    margin: 0px;
+    padding: 20px;
+  }
+  
+  .sitemap {
+    width: 20%;
+    background-color: lightgreen;
+    min-height: 100%;
+  }
+  
+  .section {
+    padding-left: 20px;
+  }
+  
+  .section h2 {
+    padding-top: 20px;
+  }
+  
+  .root {
+    display: flex;
+  }
+  
+  .content {
+    width: 80%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .button {
+    padding: 8px 16px;
+    text-decoration: none;
+    background-color: green;
+    color: white;
+    height: 20px;
+  }
+  
+  .left {
+    float: left!important;
+  }
+  
+  .right {
+    float: right!important;
+  }
+  
+  .green {
+    display: flex;
+    background-color: lightgreen;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .top {
+    padding-top: 50px;
+  }
+  
+  .col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  ul.breadcrumb {
+    padding: 10px 16px;
+    list-style: none;
+    background-color: #eee;
+  }
+  ul.breadcrumb li {
+    display: inline;
+    font-size: 18px;
+  }
+  ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: ">\00a0";
+  }
+  
+  .calculatorSettings {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .featured {
+    background-color: aquamarine;
+    border-radius: 20px;
+    text-align: center;
+  }

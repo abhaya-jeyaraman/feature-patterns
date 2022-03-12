@@ -1,0 +1,302 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      let progress = 0;
+    </script>
+  </head>
+  <body onLoad="LoadMe()">
+    <h1 class="heading">Green Computing</h1>
+    <div class="root">
+      <div class="sitemap">
+        <div class="section">
+          <h2>Paperless</h2>
+          <a href="news_online.html"><p>News online</p></a>
+          <a href="class_material.html"><p>Class material online</p></a>
+          <a href="paperless.html"><p>Paperless Office</p></a>
+          <a href="ebooks.html"><p>E-books</p></a>
+        </div>
+        <div class="section">
+          <h2>Reduce</h2>
+          <a href="just_in_time.html"><p>Just in time inventory</p></a>
+          <a href="online_meetings.html"><p>Online meetings</p></a>
+          <a href="e-gifts.html"> <p>E-gifts</p></a>
+        </div>
+        <div class="section">
+          <h2>Reuse and recycle</h2>
+          <a href="e-waste.html"> <p>Ewaste & Electronic recycling</p></a>
+          <a href="cycle_of_purchasing.html"> <p>Cycle of purchasing</p></a>
+          <a href="reusing_old_computers.html"> <p>Reusing old computers</p></a>
+        </div>
+        <div class="section">
+          <h2>Energy</h2>
+          <a href="wasted_energy.html"> <p>Wasted Energy</p></a>
+          <a href="smart_buildings.html"> <p>Smart buildings</p></a>
+          <a href="computer_inefficiency.html"> <p>Computer inefficiencies</p></a>
+        </div>
+      </div>
+      <div class="content">
+        <ul class="breadcrumb">
+          <li><a href="index.html">Home</a></li>
+          <li>Paperless</li>
+          <li><a href="/ebooks.html">Ebooks</a></li>
+        </ul>
+       
+        <div class="col">
+          <div class="row">
+            <a class="left button" href="paperless.html">Prev</a>
+            <h1>Ebooks content</h1>
+            <a class="right button" href="just_in_time.html">Next</a>
+          </div>
+          <div class="featured">
+            <p><strong>Featured:   </strong> Learn more about online class materials <a href="/class_material.html">here</a></p>
+          </div>
+          <p>
+            This page allows you to specify a book and calculate how many trees will be saved based on your order. 
+            <button onclick="showExtra()" id="showMore">Show more</button>
+          </p>
+          <p style="display: none;" id="extrainfo">
+            An ebook is an electronic version of the book which can be downloaded and read in a computer system. 
+            Ordering an ebook saves a lot of paper instead of printing them. This website allows you to check the 
+            impact of ordering ebooks instead of traditional books. The calculator can be found below. 
+          </p>
+          <img height="300px" width="400px" src="./images/undraw_ebook.png" style="align-self: center;"><br>
+          <p style="text-align: center; font-size: 12px;">Image source: https://undraw.co/</p>
+          <div style="align-self: center;">
+            <button onclick="treesSaved()" style="background-color: green;color: white;padding: 8px 16px;">Calculate trees saved</button><span class="coachmark" id="step1" style="background-color: yellow; padding: 5px;margin-left: 5px;">&larr; Step 1 : Start calculator</span></div><br>
+            <div style="display: flex;flex-direction: row;justify-content: space-between;visibility: hidden;" id="calculateOption">
+              <button onclick="popOver()">View how this calculator works</button>
+              <div>
+                Calculator Settings: <select id="mode" onchange="settingChange()">
+                  <option value="simple" selected="selected">Simple</option>
+                </select>
+              </div>
+            </div>
+            <div id='progress' style="display: none; text-align: center;">
+              <h2>Progress Meter <h2 style="color: green" id="progressValue">0%</h2></h2>
+            </div>
+            <div id="simpleSetting" style="display: none;align-self: center;">
+              <div id="bookName">
+                <p>Enter book details:</p>
+                Book name: <input id="nameOfBook" onkeydown="removeCoach()" onmouseover="bookNameHint()" onmouseleave="noHint()"><span class="coachmark" id="step2" style="background-color: yellow; padding: 5px;margin-left: 5px;">&larr; Step 2 : Enter a book name</span><br>
+                <p id="hint"></p>
+                <button onclick="onNextClick()" style="background-color: green;color: white;padding: 8px 16px;">Next</button> <span class="coachmark" id="step3" style="background-color: yellow; padding: 5px;margin-left: 5px;display: none;">&larr; Step 3 : Click next to proceed</span>
+              </div>
+              <div id="simpleSize" style="display: none;align-self: center;">
+                <span>Enter book size:</span><br>
+                <input type="radio" id="pocket" name="book_size" value="50" checked>
+                <label for="pocket">Pocket size book(50 pages)</label><br>
+                <input type="radio" id="regular" name="book_size" value="200">
+                <label for="pocket">Regular size book(200 pages)</label><br>
+                <input type="radio" id="textbook" name="book_size" value="500">
+                <label for="pocket">Textbook(500 pages)</label><br>
+                <input type="radio" id="large" name="book_size" value="1000">
+                <label for="pocket">Large textbook(1000 pages)</label><br><br>
+                <button onclick="backToName()" style="background-color: green;color: white;padding: 8px 16px;">Previous</button>
+                <button onclick="numberBooks()" style="background-color: green;color: white;padding: 8px 16px;">Next</button>
+                <span class="coachmark" id="step4" style="background-color: yellow; padding: 5px;margin-left: 5px;">&larr; Step 4 : Select size and click next to proceed</span>
+              </div>
+              <div id="customSize" style="display: none;align-self: center;">
+                <p>Number of pages in each book: </p>
+                <input id="numberPages" onmouseover="pagesHint()" onmouseleave="noHint()"><br>
+                <p id="hint"></p>
+                <button onclick="backToName()" style="background-color: green;color: white;padding: 8px 16px;">Previous</button>
+                <button onclick="numberBooks()" style="background-color: green;color: white;padding: 8px 16px;">Next</button>
+              </div>
+              <div id="booksNumber" style="display: none;">
+                Enter number of books: <input id="simplebookNumber" onkeydown="removeStep()" onmouseover="booksHint()" onmouseleave="noHint()"><span class="coachmark" id="step5" style="background-color: yellow; padding: 5px;margin-left: 5px;">&larr; Step 5 : Enter number of books</span><br>
+                <p id="hint"></p>
+                <button onclick="backToSize()" style="background-color: green;color: white;padding: 8px 16px;">Previous</button>
+                <button onclick="calculateTreesSaved( )" style="background-color: green;color: white;padding: 8px 16px;">Submit</button>
+                <span class="coachmark" id="step6" style="background-color: yellow; padding: 5px;margin-left: 5px;display: none;">&larr; Step 6 : Click submit to view result</span>
+                <p id="saved"></p>
+                <div id='nextsteps' style='display: none; padding: 20px;' class="featured">
+                  <p><strong>Next steps:</strong>You can proceed to order the ebook <strong><span id="name"></span> </strong>now</p>
+                </div>
+              </div>
+            </div>
+            <div id="calculate" style="display:none">
+              <p>
+              Given the number of pages to be printed, this program will calculate the number of trees that will be saved if ebook is ordered instead</p>
+              Number of books to be ordered: <input id="bookNumber" onmouseover="booksHint()" onmouseleave="noHint()"><br>
+              Number of pages in each book: <input id="numberPages" onmouseover="pagesHint()" onmouseleave="noHint()">
+              <p id="hint"></p>
+              <button id="inputbutton" type="button" onclick="calculateTreesSaved()">Calculate</button>
+              <!-- <button id="inputhelp" onclick="myPop()" style="display:none">Input Help</button> -->
+              </p>
+              <p id="saved"></p>
+            </div>
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
+    <script>
+      function calculateTreesSaved() {
+          var books, pages, text;
+          progress = 100;
+          books = document.getElementById('simplebookNumber').value
+          if(typeof(Storage) !== "undefined") {
+            localStorage.numberOfBook = books;
+          }
+          if(document.getElementById('mode').value === 'simple'){
+            pages = document.querySelector('input[name="book_size"]:checked').value;
+        } else {
+          pages = document.getElementById('numberPages').value
+        }
+        document.getElementById('step6').style.display = 'none';
+          result = ((books*pages)/80500);
+          text = "By not printing these pages we will be saving " + result + " trees";
+          document.getElementById("saved").innerHTML = text;
+          document.getElementById("nextsteps").style.display = 'block';
+          document.getElementById("name").innerHTML = document.getElementById("nameOfBook").value;
+          document.getElementById("progressValue").innerHTML = progress +'%'
+      }
+      function myInput() {
+        document.getElementById('calculate').style.display='block';
+      }
+      function booksHint() {
+        if(Number(localStorage.visitcount) < 3) {
+	        document.getElementById("hint").innerHTML = "Please input an integer indicating number of books";
+        }
+      }
+      function bookNameHint() {
+        if(Number(localStorage.visitcount) < 3) {
+	        document.getElementById("hint").innerHTML = "Please enter the book name as a string";
+        }
+      }
+      function pagesHint() {
+        if(Number(localStorage.visitcount) < 3) {
+	        document.getElementById("hint").innerHTML = "Please input an integer indicating number of pages";
+        }
+      }
+      function noHint() {
+	      document.getElementById("hint").innerHTML = "";
+      }
+      function showExtra() {
+        var x = document.getElementById("extrainfo");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+          document.getElementById("showMore").innerHTML = "Show less";
+        } else {
+          x.style.display = "none";
+          document.getElementById("showMore").innerHTML = "Show more";
+        }
+      }
+      function treesSaved() {
+        document.getElementById("calculateOption").style.visibility = 'visible';
+        document.getElementById("simpleSetting").style.display = 'block';
+        document.getElementById("progress").style.display = 'block';
+        document.getElementById('step1').style.display = 'none';
+      }
+      function popOver() {
+        alert('The calculator is based on data provided in \nhttps://science.howstuffworks.com/environmental/conservation/issues/rainforest.htm')
+      }
+      function onNextClick() {
+        progress = progress + 33.33;
+        document.getElementById("progressValue").innerHTML = progress +'%'
+        document.getElementById("bookName").style.display = 'none';
+        if(document.getElementById('mode').value === 'simple'){
+          document.getElementById("simpleSize").style.display = 'block';
+        } else {
+          document.getElementById("customSize").style.display = 'block';
+        }
+        if(typeof(Storage) !== "undefined") {
+          localStorage.storedBookName = document.getElementById("nameOfBook").value;
+        }
+      }
+      function backToName() {
+        progress = progress - 33.33;
+        document.getElementById("progressValue").innerHTML = progress +'%'
+        if(document.getElementById('mode').value === 'simple'){
+          document.getElementById("simpleSize").style.display = 'none';
+        } else {
+          document.getElementById("customSize").style.display = 'none';
+        }
+        document.getElementById("bookName").style.display = 'block';
+      }
+      function backToSize() {
+        progress = progress - 33.33
+        document.getElementById("progressValue").innerHTML = progress +'%'
+        document.getElementById("booksNumber").style.display = 'none';
+        if(document.getElementById('mode').value === 'simple'){
+          document.getElementById("simpleSize").style.display = 'block';
+        } else {
+          document.getElementById("customSize").style.display = 'block';
+        }
+      }
+      function settingChange(){
+        document.getElementById('bookName').style.display = 'block';
+        document.getElementById('simpleSize').style.display = 'none';
+        document.getElementById("customSize").style.display = 'none';
+        document.getElementById("booksNumber").style.display = 'none';
+        progress = 0;
+        document.getElementById("progressValue").innerHTML = progress +'%'
+      }
+      function numberBooks() {
+        progress = progress + 33.33
+        document.getElementById("progressValue").innerHTML = progress +'%'
+        if(document.getElementById('mode').value === 'simple'){
+          document.getElementById("simpleSize").style.display = 'none';
+          if(typeof(Storage) !== "undefined") {
+            localStorage.numberOfPages = document.querySelector('input[name="book_size"]:checked').value;
+          }
+        } else {
+          document.getElementById("customSize").style.display = 'none';
+          if(typeof(Storage) !== "undefined") {
+            localStorage.numberOfPages = document.getElementById('numberPages').value;
+          }
+        }
+        document.getElementById("booksNumber").style.display = 'block';
+      }
+      function removeCoach() {
+        if(Number(localStorage.visitcount) === 1){
+          document.getElementById('step2').style.display = 'none';
+          document.getElementById('step3').style.display = 'inline';
+        }
+       
+      }
+      function removeStep() {
+        if(Number(localStorage.visitcount) === 1){
+          document.getElementById('step5').style.display = 'none';
+          document.getElementById('step6').style.display = 'inline';
+        }
+      }
+      function LoadMe() {
+        if (typeof(Storage) !== "undefined") {
+          if (localStorage.visitcount) {
+            localStorage.visitcount = Number(localStorage.visitcount)+1;
+          } else {
+              localStorage.visitcount = 1;  
+          }
+          var coachmarks = document.getElementsByClassName('coachmark');
+          if(Number(localStorage.visitcount) > 1)
+            for(let i=0; i<coachmarks.length;i++){
+              coachmarks[i].style.display = 'none';
+            }
+
+          if (localStorage.storedBookName) 
+            document.getElementById("nameOfBook").value = localStorage.storedBookName;
+          if (!isNaN(localStorage.numberOfBook)) 
+            document.getElementById("simplebookNumber").value = localStorage.numberOfBook;
+          if (!isNaN(localStorage.numberOfPages)) 
+            document.getElementById("numberPages").value = localStorage.numberOfPages;
+        }
+        var bookSizeList = document.getElementsByName('book_size')
+        for(let i=0; i<=3; i++) {
+          if(bookSizeList[i].value == localStorage.numberOfPages) {
+            bookSizeList[i].checked = true
+          }
+        }
+        if(localStorage.visitcount >= 3) {
+          let customOption = document.createElement('option')
+          customOption.value = 'custom'
+          customOption.text = 'Custom'
+          document.getElementById('mode').appendChild(customOption)
+        }
+       
+      }
+
+      </script>
+  </body>
+</html>
